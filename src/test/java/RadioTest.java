@@ -7,38 +7,40 @@ public class RadioTest {
     @Test
     public void shouldIncreaseVolume() {
         Radio radioVolume = new Radio();
+        radioVolume.setCurrentVolume(0);
         radioVolume.setIncreaseVolume();
         int expected = 1;
         int actual = radioVolume.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);          //   увеличение звука на 1 работает
     }
 
     @Test
-    public void shouldIncreaseVolume10() {
+    public void shouldIncreaseVolume100() {
         Radio radioVolume = new Radio();
-        radioVolume.setCurrentVolume(10);
+        radioVolume.setCurrentVolume(100);
         radioVolume.setIncreaseVolume();
-        int expected = 10;
+        int expected = 100;
         int actual = radioVolume.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);      //   больше максимальной громкости 100 звук прибавить нельзя
     }
     @Test
     public void shouldDecreaseVolume0() {
         Radio radioVolume = new Radio();
+        radioVolume.setCurrentVolume(0);
         radioVolume.setDecreaseVolume();
         int expected = 0;
         int actual = radioVolume.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);       // ниже 0 звук убавить нельзя))))))))
     }
 
     @Test
     public void shouldDecreaseVolume() {
         Radio radioVolume = new Radio();
-        radioVolume.setCurrentVolume(10);
+        radioVolume.setCurrentVolume(100);
         radioVolume.setDecreaseVolume();
-        int expected = 9;
+        int expected = 99;
         int actual = radioVolume.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);    //   убавить звук на 1 работает
     }
 
 
@@ -104,29 +106,6 @@ public class RadioTest {
 
     }
 
-    @Test
-    public void shouldSetVolumeMore10() {
-        Radio radioVolume = new Radio();
-        radioVolume.setCurrentVolume(11);
-        radioVolume.setIncreaseVolume();
-        int expected = 1;
-        int actual = radioVolume.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetVolumeLessThan0() {
-        Radio radioVolume = new Radio();
-        radioVolume.setCurrentVolume(-1);
-        radioVolume.setIncreaseVolume();
-        int expected = 1;
-        int actual = radioVolume.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
-    }
-
-
-
 
 
 }
-
