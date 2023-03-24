@@ -2,41 +2,27 @@ import com.sun.nio.sctp.Association;
 
 public class Radio {
 
-    private int currentVolume=5;
+    private int currentVolume;
     private int currentChannel;
-    private int minNumberChannel = 0;
+    private int minNumberChannel;
     private int countChannel = 10;
     private int maxNumberChannel = countChannel - 1;
 
-    public Radio(int countChannel, int setCurrentVolume) {
-
-        if (setCurrentVolume < 0 ) {
-            return;
-        }
-        if ( setCurrentVolume > countChannel - 1 ) {
-            return;
-        }
-        currentVolume = setCurrentVolume;
+    public Radio(int minNumberChannel, int maxNumberChannel) {
+        this.minNumberChannel = minNumberChannel;
+        this.maxNumberChannel = maxNumberChannel;
     }
 
-//    public Radio (int setIncreaseVolume) {
-//        if (setIncreaseVolume < 100) {
-//            currentVolume = currentVolume + 1;
-//        } else {
-//            currentVolume = 100;
-//        }
-//
-//    }
-
-    public Radio(int setIncreaseVolume) {
-        if (setIncreaseVolume < 100) {
-            currentVolume = setIncreaseVolume + 1;
-        } else {
-            currentVolume = 100;
-        }
+    public Radio(int countChannel) {
+        this.countChannel=countChannel;
+        maxNumberChannel = countChannel - 1;
+        //this.minNumberChannel = 0;
     }
 
 
+    public int getMaxNumberChannel() {
+        maxNumberChannel = countChannel - 1;
+        return maxNumberChannel; }
     public int getCountChannel() {
         return countChannel;
     }
@@ -49,22 +35,34 @@ public class Radio {
         return currentChannel;
     }
 
-//    public void setCurrentVolume(int newCurrentVolume) {
-//        if (newCurrentVolume < 0 ) {
-//            return;
-//        }
-//        if (newCurrentVolume > 100 ) {
-//            return;
-//        }
-//
-//        currentVolume = newCurrentVolume;
-//
-//    }
-    public void setCurrentChannel(int newCurrentChannel) {
-        if (newCurrentChannel < 0 ) {
+    //public void setCountChannel() { return countChannel; }
+
+    public void setCurrentVolume(int newCurrentVolume) {
+        if (newCurrentVolume < 0 ) {
             return;
         }
-        if (newCurrentChannel > 9 ) {
+        if (newCurrentVolume > 100 ) {
+            return;
+        }
+
+        currentVolume = newCurrentVolume;
+
+    }
+    public void setCountChannel(int newCountChannel) {
+        if (newCountChannel < minNumberChannel ) {
+            return;
+        } else {
+            countChannel = newCountChannel;
+            maxNumberChannel = countChannel - 1;
+        }
+
+    }
+
+    public void setCurrentChannel(int newCurrentChannel) {
+        if (newCurrentChannel < minNumberChannel ) {
+            return;
+        }
+        if (newCurrentChannel > maxNumberChannel ) {
             return;
         }
 
@@ -74,14 +72,14 @@ public class Radio {
 
 
 
-//    public void setIncreaseVolume() {
-//
-//        if (currentVolume < 100) {
-//            currentVolume = currentVolume + 1;
-//        } else {
-//            currentVolume = 100;
-//        }
-//    }
+    public void setIncreaseVolume() {
+
+        if (currentVolume < 100) {
+            currentVolume = currentVolume + 1;
+        } else {
+            currentVolume = 100;
+        }
+    }
 
 
 
@@ -95,7 +93,7 @@ public class Radio {
 
 
     public void next() {
-        if (currentChannel < 9) {
+        if (currentChannel < maxNumberChannel) {
             currentChannel = currentChannel + 1;
         } else {
             currentChannel = 0;
@@ -106,7 +104,7 @@ public class Radio {
         if (currentChannel > 0) {
             currentChannel = currentChannel - 1;
         } else {
-            currentChannel = 9;
+            currentChannel = maxNumberChannel;
         }
     }
 
