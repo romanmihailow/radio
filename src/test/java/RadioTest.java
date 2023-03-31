@@ -21,6 +21,14 @@ public class RadioTest {
     }
 
     @Test
+    public void souldSetCountChennelLess0() {
+        Radio radioChannel = new Radio(10);
+        radioChannel.setCountChannel(-5);
+        Assertions.assertEquals(10, radioChannel.getCountChannel());
+
+    }
+
+    @Test
     public void shouldMaxNumberChannel() {
         Radio radioChannel = new Radio(10);
         //radioChannel.setCountChannel(100);
@@ -47,6 +55,17 @@ public class RadioTest {
         int actual = radioVolume.getCurrentVolume();
         Assertions.assertEquals(expected, actual);      //   больше максимальной громкости 100 звук прибавить нельзя
     }
+
+    @Test
+    public void shouldIncreaseVolumeMore100() {
+        Radio radioVolume = new Radio(10);
+        radioVolume.setCurrentVolume(155);
+        radioVolume.setIncreaseVolume();
+        int expected = 1;
+        int actual = radioVolume.getCurrentVolume();
+        Assertions.assertEquals(expected, actual);      //   больше максимальной громкости 100 звук прибавить нельзя
+    }
+
     @Test
     public void shouldDecreaseVolume0() {
         Radio radioVolume = new Radio(10);
@@ -68,15 +87,6 @@ public class RadioTest {
     }
 
 
-
-
-
-
-
-
-
-
-
     @Test
     public void shouldSwitchPrevChannel() {
         Radio radioChannel = new Radio(10);     //проверка переключения канала назад (текущий канал 0)
@@ -87,6 +97,7 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
 
     }
+
     @Test
     public void shouldSwitchNextChannel() {
         Radio radioChannel = new Radio(10);     //проверка переключения канала вперед (текущий канал 0)
@@ -118,6 +129,7 @@ public class RadioTest {
         int actual = radioChannel.getCurrentChannel();            //0
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void shouldSetChannelLessMinNumberChannel() {
         Radio radioChannel = new Radio(10);           //проверка установки номера канала менее минимального количества каналов
@@ -147,9 +159,6 @@ public class RadioTest {
         int actual = radioChannel.getCurrentChannel();            //0
         Assertions.assertEquals(expected, actual);
     }
-
-
-
 
 
 }
